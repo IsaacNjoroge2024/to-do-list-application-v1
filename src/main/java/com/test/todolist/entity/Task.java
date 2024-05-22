@@ -30,39 +30,6 @@ public class Task {
     @Column(name = "is_complete")
     private boolean isComplete;
 
-    /*public Task() {
-    }
-
-    public Task(long taskId, String description, boolean isComplete) {
-        this.taskId = taskId;
-        this.description = description;
-        this.isComplete = isComplete;
-    }
-
-
-    public long getTaskId() {
-        return taskId;
-    }
-
-    public void setTaskId(long taskId) {
-        this.taskId = taskId;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public boolean isComplete() {
-        return isComplete;
-    }
-
-    public void setComplete(boolean complete) {
-        isComplete = complete;
-    }*/
 }
 
 

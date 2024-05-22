@@ -11,9 +11,6 @@ import java.util.List;
 @RequestMapping(value = "/api/v1/tasks")
 public class ToDoListController {
 
-    //@Autowired
-    //private ToDoListServiceImp toDoListServiceImp;
-
 
     private ToDoListService toDoListService;
 
