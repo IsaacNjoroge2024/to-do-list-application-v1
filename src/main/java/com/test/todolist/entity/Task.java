@@ -1,21 +1,36 @@
 package com.test.todolist.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
-
-@Entity //signals the repo which we have the Jpa, that the class Task should be treated as a table in the database
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Accessors(chain = true)
+@Table(name = "task")
+@Entity
 public class Task {
 
-    @Id //makes it the primary key
-    @GeneratedValue //generates the id automatically.
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "task_id")
     private long taskId;
 
-    private String description; //@notblank
+    @Column
+    private String description;
+
+    @Column(name = "is_complete")
     private boolean isComplete;
 
-    public Task() {
+    /*public Task() {
     }
 
     public Task(long taskId, String description, boolean isComplete) {
@@ -47,7 +62,7 @@ public class Task {
 
     public void setComplete(boolean complete) {
         isComplete = complete;
-    }
+    }*/
 }
 
 
