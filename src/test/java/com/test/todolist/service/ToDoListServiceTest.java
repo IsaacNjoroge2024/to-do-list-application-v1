@@ -16,7 +16,7 @@ import java.util.Optional;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ToDoListServiceTest {   //Here i have unnecessary stubbings
+public class ToDoListServiceTest {   
 
     @Mock
     private ToDoListRepository toDoListRepository;
