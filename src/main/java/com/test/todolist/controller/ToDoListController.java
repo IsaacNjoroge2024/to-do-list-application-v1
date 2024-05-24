@@ -1,28 +1,28 @@
-package com.test.todolist.Controller;
+package com.test.todolist.controller;
 
 import com.test.todolist.service.ToDoListService;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import com.test.todolist.entity.Task;
 
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping(value = "/api/v1/tasks")
 public class ToDoListController {
 
 
-    private ToDoListService toDoListService;
+    private final ToDoListService toDoListService;
 
-
-    public ToDoListController(ToDoListService toDoListService) {
-        this.toDoListService = toDoListService;
-
-    }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Task> findAll(){
+    public Page<Task> findAll(){ //(@PathVariable int offset,@PathVariable int pageSize){
+        //Page<Task> taskPage = toDoListService.getAllItems(offset, pageSize);
         return toDoListService.getAllItems();
     }
 

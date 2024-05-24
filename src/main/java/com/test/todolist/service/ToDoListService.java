@@ -1,13 +1,14 @@
 package com.test.todolist.service;
 
 import com.test.todolist.entity.Task;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 
 public interface ToDoListService {
 
-    List<Task> getAllItems();
+    Page<Task> getAllItems();
 
     Task getTaskById(Long id);
 

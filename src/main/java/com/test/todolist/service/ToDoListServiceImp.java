@@ -1,21 +1,26 @@
 package com.test.todolist.service;
 
 import com.test.todolist.entity.Task;
-import com.test.todolist.repo.ToDoListRepository;
+import com.test.todolist.repository.ToDoListRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
+@AllArgsConstructor
 @Service
 public class ToDoListServiceImp implements ToDoListService {
 
 
-    private ToDoListRepository toDoListRepository;
+    private final ToDoListRepository toDoListRepository;
 
 
     @Override
-    public List<Task> getAllItems() {
-        return toDoListRepository.findAll();
+    public Page<Task> getAllItems(){ //(int offset, int pageSize) {
+        //Page<Task> taskPage = toDoListRepository.findAll(PageRequest.of(offset, pageSize));
+        Pageable pageable = PageRequest.of(0, 10);
+        return toDoListRepository.findAll(pageable);
     }
 
     @Override
