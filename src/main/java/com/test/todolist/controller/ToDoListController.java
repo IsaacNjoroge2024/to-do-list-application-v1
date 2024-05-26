@@ -2,13 +2,10 @@ package com.test.todolist.controller;
 
 import com.test.todolist.service.ToDoListService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import com.test.todolist.entity.Task;
-
-import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -38,7 +35,7 @@ public class ToDoListController {
         return toDoListService.addTask(task);
     }
 
-    @PutMapping
+    @PutMapping// You missed id here. Please add it
     @ResponseStatus(HttpStatus.OK)
     public Task update(@RequestBody Task task) {
         return toDoListService.updateTask(task);

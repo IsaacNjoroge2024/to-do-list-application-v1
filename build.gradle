@@ -1,37 +1,93 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.2.5'
-	id 'io.spring.dependency-management' version '1.1.4'
+    id 'java'
+    id 'org.springframework.boot' version '3.2.5'
+    id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group = 'com.test'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '17'
+    sourceCompatibility = '17'
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+sourceSets {
+    integrationTest {
+        java.srcDir file('src/integrationTest/java')
+        resources.srcDir file('src/integrationTest/resources')
+
+        compileClasspath += sourceSets.main.output + sourceSets.test.output
+        runtimeClasspath += sourceSets.main.output + sourceSets.test.output
+    }
 }
 
 dependencies {
+    // Please add these versions to gradle.properties. See how I did it below
+    compileOnly 'org.projectlombok:lombok:1.18.32'
+    annotationProcessor 'org.projectlombok:lombok:1.18.32'
 
-	compileOnly 'org.projectlombok:lombok:1.18.32'
-	annotationProcessor 'org.projectlombok:lombok:1.18.32'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	runtimeOnly 'com.h2database:h2'
-	implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    // Spring Boot
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	//testImplementation "io.rest-assured:rest-assured:$restAssured"
-	testImplementation 'io.rest-assured:rest-assured:5.4.0'
-	testImplementation 'org.testcontainers:junit-jupiter'
-	testImplementation 'org.hamcrest:hamcrest:2.2'
+    // Database
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation 'com.h2database:h2'
+
+    // Test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation "io.rest-assured:rest-assured:$restAssured"
+    testImplementation 'org.testcontainers:junit-jupiter'
+
+    // Integration Testing
+    integrationTestImplementation "org.junit.jupiter:junit-jupiter-api:$junitJupiterApi"
+    integrationTestImplementation "org.junit.jupiter:junit-jupiter-engine:$junitJupiterEngine"
+    integrationTestImplementation "org.junit.platform:junit-platform-engine:$junitJupiterVersion"
+    integrationTestImplementation "org.junit.platform:junit-platform-commons:$junitJupiterVersion"
+    integrationTestImplementation 'com.h2database:h2'
 }
-tasks.named('test') {
-	useJUnitPlatform()
-	}
 
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+task integrationTest(type: Test, group: 'verification') {
+    description = 'Runs the integration tests.'
+
+    useJUnitPlatform {
+        filter {
+            includeTestsMatching '*IT'
+        }
+    }
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
+    classpath = sourceSets.integrationTest.runtimeClasspath
+}
+
+bootJar {
+    archiveFileName = "${rootProject.name}.jar"
+}
+
+task printServiceName {
+    doLast {
+        println rootProject.name
+    }
+}
+
+task printServiceVersion {
+    doLast {
+        println project.version
+    }
+}
 
