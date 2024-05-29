@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 //gives our classes access to more functions that can be used
 @Repository
 public interface ToDoListRepository extends JpaRepository<Task, Long> {
-    Page<Task> findAllBy(Pageable pageable);
+    //Page<Task> findAllBy(Pageable pageable);
 }

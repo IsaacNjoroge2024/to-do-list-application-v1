@@ -2,13 +2,18 @@ package com.test.todolist.service;
 
 import com.test.todolist.entity.Task;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 
 public interface ToDoListService {
 
-    Page<Task> getAllItems();
+    Page<Task> getAllItems(Pageable Page);
+
+    //Page<Task> getAllCompletedTasks();
+
+    //Page<Task> getAllUncompletedTasks();
 
     Task getTaskById(Long id);
 
@@ -18,5 +23,5 @@ public interface ToDoListService {
 
     void deleteTaskById(Long id);
 
-    boolean checkTaskCompleted(Task task);
+    Boolean checkTaskCompleted(Task task);
 }
