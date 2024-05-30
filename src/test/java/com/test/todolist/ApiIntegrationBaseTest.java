@@ -1,12 +1,8 @@
 package com.test.todolist;
 
 
-import com.test.todolist.repository.ToDoListRepository;
 import io.restassured.RestAssured;
-import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 

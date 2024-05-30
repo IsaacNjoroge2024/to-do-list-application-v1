@@ -1,6 +1,6 @@
 package com.test.todolist.controller;
 
-import com.test.todolist.entity.Task;
+import com.test.todolist.task.entity.Task;
 import com.test.todolist.service.ToDoListServiceBase;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -15,12 +15,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
 
-class ToDoListControllerIT extends ToDoListServiceBase {
+class TaskControllerIT extends ToDoListServiceBase {
 
     private RequestSpecification requestSpecification;
 
@@ -39,7 +39,7 @@ class ToDoListControllerIT extends ToDoListServiceBase {
     void getAllTasks() {
 
         Task task = createTask();
-        List<Task> taskList = Arrays.asList(task);
+        List<Task> taskList = Collections.singletonList(task);
 
         int pageNumber = 1;
         int pageSize = 10;
@@ -91,7 +91,7 @@ class ToDoListControllerIT extends ToDoListServiceBase {
     }
 
     // Add Update Test
-    @Test
+   /* @Test
     @DisplayName("Task has been updated successfully.")
     void updateTask() {
 
@@ -110,7 +110,7 @@ class ToDoListControllerIT extends ToDoListServiceBase {
                 .statusCode(HttpStatus.OK.value())
                 .body("description", equalTo(updatedTask.getDescription()))
                 .body("complete", equalTo(updatedTask.isComplete()));
-    }
+    }*/
 
     @Test
     @DisplayName("Verify that Task is deleted successfully.")

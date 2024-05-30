@@ -1,5 +1,6 @@
-package com.test.todolist.entity;
+package com.test.todolist.task.entity;
 
+import com.test.todolist.category.entity.Category;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,7 +23,7 @@ import lombok.experimental.Accessors;
 public class Task {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id")
     private Long taskId;
 

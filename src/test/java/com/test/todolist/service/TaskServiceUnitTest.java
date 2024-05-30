@@ -1,7 +1,8 @@
 package com.test.todolist.service;
 
-import com.test.todolist.entity.Task;
-import com.test.todolist.repository.ToDoListRepository;
+import com.test.todolist.task.entity.Task;
+import com.test.todolist.task.repository.TaskRepository;
+import com.test.todolist.task.service.TaskServiceImp;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,13 +18,13 @@ import java.util.Optional;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ToDoListServiceUnitTest {
+public class TaskServiceUnitTest {
 
     @Mock
-    private ToDoListRepository toDoListRepository;
+    private TaskRepository taskRepository;
 
     @InjectMocks
-    private ToDoListServiceImp toDoListServiceImp;
+    private TaskServiceImp toDoListServiceImp;
 
 
     /*@Test
@@ -31,7 +32,7 @@ public class ToDoListServiceUnitTest {
 
         Page<Task> tasks = Mockito.mock(String.valueOf(Task.class));
 
-        when(this.toDoListRepository.findAll(Mockito.any(Pageable.class))).thenReturn(tasks);
+        when(this.taskRepository.findAll(Mockito.any(Pageable.class))).thenReturn(tasks);
 
         Task savedTask = (Task) toDoListServiceImp.getAllItems(pageable);
 
@@ -43,7 +44,7 @@ public class ToDoListServiceUnitTest {
     public void ToDoListService_GetItemsById_ReturnItem(){
         long taskId = 1;
         Task tasks = Mockito.mock(String.valueOf(Task.class));
-        when(toDoListRepository.findById(taskId)).thenReturn(Optional.ofNullable(tasks));
+        when(taskRepository.findById(taskId)).thenReturn(Optional.ofNullable(tasks));
 
         Task taskReturn = toDoListServiceImp.getTaskById(taskId);
         Assertions.assertThat(taskReturn).isNotNull();
@@ -53,7 +54,7 @@ public class ToDoListServiceUnitTest {
     public void ToDoListService_AddTask_AddItem(){
 
         Task task = Mockito.mock(String.valueOf(Task.class));
-        when(toDoListRepository.save(task)).thenReturn(task);
+        when(taskRepository.save(task)).thenReturn(task);
         Task addedTask = toDoListServiceImp.addTask(task);
         Assertions.assertThat(addedTask).isNotNull();
     }
