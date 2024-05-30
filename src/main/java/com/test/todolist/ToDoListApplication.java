@@ -10,6 +10,7 @@ public class ToDoListApplication {
 
 
 		SpringApplication.run(ToDoListApplication.class, args);
+		System.out.println("Hello world");
 	}
 
 }
